@@ -1,0 +1,5 @@
+footer {
+	background-color: var(--my-green);
+	color: var(--my-white);
+	padding: 2rem;
+}

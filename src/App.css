@@ -1,38 +1,58 @@
-.App {
-  text-align: center;
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0-modified | 20110126
+   License: none (public domain)
+*/
+@import url('https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&display=swap');
+
+/*** The new CSS Reset - version 1.2.0 (last updated 23.7.2021) ***/
+
+/* Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property */
+
+*:where(:not(iframe, canvas, img, svg, video):not(svg *)) {
+	all: unset;
+	display: revert;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Preferred box-sizing value */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/*
+  Remove list styles (bullets/numbers)
+  in case you use it with normalize.css
+*/
+ol,
+ul {
+	list-style: none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* For images to not be able to exceed their container */
+img {
+	max-width: 100%;
 }
 
-.App-link {
-  color: #61dafb;
+/* Removes spacing between cells in tables */
+table {
+	border-collapse: collapse;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Revert the 'white-space' property for textarea elements on Safari */
+textarea {
+	white-space: revert;
+}
+:root {
+	--my-light-green: #badbc8;
+	--my-green: #059149;
+	--my-white: #d9eddf;
+	--my-black: #003f1c;
+	--my-gray: #575c60;
+	--my-dark-green: #57725d;
+	--my-blue: #00aeee;
+	--my-light-blue: #76d1fc;
+}
+* {
+	font-family: 'Spline Sans', sans-serif;
 }
