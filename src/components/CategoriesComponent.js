@@ -10,12 +10,12 @@ export default function CategoryContainer(props) {
 		fetchData(`${process.env.REACT_APP_BACK_END_URI}/products/`, setProducts);
 	}, []);
 	let rows = [];
-	for (let i = 1; i <= Math.ceil(products.length / 4); i++) {
+	for (let i = 1; i <= Math.ceil(products.length / 3); i++) {
 		rows.push(i);
 	}
 	let cols = [];
-	for (let i = 0; i <= Math.ceil(products.length / 4); i++) {
-		cols.push(products.slice(i * 4, i * 4 + 4));
+	for (let i = 0; i <= Math.ceil(products.length / 3); i++) {
+		cols.push(products.slice(i * 3, i * 3 + 3));
 	}
 
 	console.log(rows);
@@ -30,22 +30,23 @@ export default function CategoryContainer(props) {
 				{props.title}
 			</h2>
 
-			{rows.map((e) => {
+			{rows.map((e, i) => {
 				return (
-					<Row>
+					<Row key={i}>
 						{cols
 							? cols[e].map((p) => {
-									return <ProductCard product={p}></ProductCard>;
+									return (
+										<>
+											{p.category === props.title && (
+												<ProductCard key={p._id} product={p}></ProductCard>
+											)}
+										</>
+									);
 							  })
 							: null}
 					</Row>
 				);
 			})}
-			{/* {products
-				? products.map((e, i) => {
-						return <ProductCard key={e._id}></ProductCard>;
-				  })
-				: null} */}
 		</>
 	);
 }
