@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Container, Navbar, NavDropdown, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { fetchData } from '../api/apiFunctions';
 import './Nav.css';
 const Navegation = () => {
+	const [categories, setCategories] = useState([]);
+
+	useEffect(() => {
+		fetchData(
+			`${process.env.REACT_APP_BACK_END_URI}/products/categories`,
+			setCategories
+		);
+	}, []);
+	// console.log(categories);
 	return (
 		<Navbar expand="md" variant="dark">
 			<Container>
@@ -16,9 +26,20 @@ const Navegation = () => {
 							Home
 						</Nav.Link>
 						<NavDropdown title="categorias" id="basic-nav-dropdown">
-							<NavDropdown.Item>Categorias</NavDropdown.Item>
-							<NavDropdown.Item>Another action</NavDropdown.Item>
-							<NavDropdown.Item>Something</NavDropdown.Item>
+							{categories
+								? categories.map((c, i) => {
+										return (
+											<NavDropdown.Item
+												key={i}
+												as={Link}
+												to={`/categories/${c}`}
+												style={{ cursor: 'pointer' }}
+											>
+												{c.replace(/_/g, ' ')}
+											</NavDropdown.Item>
+										);
+								  })
+								: null}
 						</NavDropdown>
 						<Nav.Link as={Link} to="/register">
 							Registrarse

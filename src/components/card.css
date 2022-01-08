@@ -1,0 +1,19 @@
+.breadcrumb {
+	margin-bottom: 0.4rem !important;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	flex-wrap: nowrap;
+}
+.breadcrumb a {
+	color: var(--my-green);
+}
+.breadcrumb-item {
+	margin-bottom: 0 !important;
+	padding-left: 0.3rem;
+	font-size: 14px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	cursor: pointer;
+}

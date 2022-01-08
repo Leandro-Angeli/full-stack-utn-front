@@ -1,0 +1,8 @@
+.nav-pills .nav-link {
+	color: var(--my-green) !important;
+	cursor: pointer;
+}
+.nav-pills .nav-link.active {
+	background-color: var(--my-green) !important;
+	color: white !important;
+}

@@ -1,4 +1,4 @@
-nav {
+.navbar {
 	background-color: var(--my-green);
 }
 .container .navbar-nav .nav-link,

@@ -1,0 +1,19 @@
+.container-product-cards {
+	display: grid;
+
+	grid-template-columns: repeat(3, 30%);
+	justify-content: center;
+	gap: 2rem;
+}
+@media (max-width: 768px) {
+	.container-product-cards {
+		grid-template-columns: repeat(2, 50%);
+
+		gap: 1rem;
+	}
+}
+@media (max-width: 576px) {
+	.container-product-cards {
+		grid-template-columns: 1fr;
+	}
+}
