@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { errorToastRegister, successToastRegister } from '../toasts/toast';
+
 export const fetchData = async (endpoint, resState) => {
 	try {
 		const res = await axios.get(endpoint);
@@ -9,15 +11,12 @@ export const fetchData = async (endpoint, resState) => {
 	}
 };
 
-export const postData = async (endpoint, req, status) => {
+export const postData = async (endpoint, req) => {
 	try {
 		const request = await axios.post(endpoint, req);
-		console.log(request);
-		status = true;
+		successToastRegister();
 	} catch (err) {
-		console.log(err);
-
-		status = false;
+		// console.log(err);
+		errorToastRegister();
 	}
-	return status;
 };

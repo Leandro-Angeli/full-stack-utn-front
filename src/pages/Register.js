@@ -4,39 +4,18 @@ import { Alert, Button, Card, Container } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { postData } from '../api/apiFunctions';
 import FormValidators from '../formValidations/FormValidators';
-import { toast } from 'react-toastify';
+
 export default function Register() {
-	let status;
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm({ resolver: FormValidators });
-	const fireToast = () => {
-		toast.error('🦄 Wow so easy!', {
-			position: 'top-center',
-			autoClose: 5000,
-			hideProgressBar: false,
-			closeOnClick: true,
-			pauseOnHover: true,
-			draggable: true,
-			progress: undefined,
-		});
+
+	const onSubmit = (data) => {
+		postData(`${process.env.REACT_APP_BACK_END_URI}/users`, data);
 	};
 
-	const onSubmit = async (data) => {
-		try {
-			await postData(
-				`${process.env.REACT_APP_BACK_END_URI}/users`,
-				data,
-				status
-			);
-			console.log('ok');
-		} catch (err) {
-			console.log('error');
-		}
-	};
-	console.log(status);
 	return (
 		<Container className=" m-5 p-2">
 			<Card>
