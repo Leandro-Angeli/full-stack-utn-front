@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
-export const errorToastRegister = () => {
-	toast.error('Ya existe un usuario con ese mail', {
+export const errorToastRegister = (msg) => {
+	toast.error(msg, {
 		position: 'top-center',
 		autoClose: 5000,
 		hideProgressBar: false,
@@ -11,8 +11,8 @@ export const errorToastRegister = () => {
 	});
 };
 
-export const successToastRegister = () => {
-	toast.success('Registro exitoso', {
+export const successToastRegister = (msg) => {
+	toast.success(msg, {
 		position: 'top-center',
 		autoClose: 5000,
 		hideProgressBar: false,

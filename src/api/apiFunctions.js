@@ -13,10 +13,10 @@ export const fetchData = async (endpoint, resState) => {
 
 export const postData = async (endpoint, req) => {
 	try {
-		const request = await axios.post(endpoint, req);
-		successToastRegister();
+		const result = await axios.post(endpoint, req);
+
+		successToastRegister(result.data.msg);
 	} catch (err) {
-		// console.log(err);
-		errorToastRegister();
+		errorToastRegister(err.response.data.msg);
 	}
 };
