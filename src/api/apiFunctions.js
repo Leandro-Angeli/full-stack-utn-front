@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { errorToastRegister, successToastRegister } from '../toasts/toast';
+import { errorToast, successToast } from '../toasts/toast';
 
 export const fetchData = async (endpoint, resState) => {
 	try {
@@ -15,8 +15,18 @@ export const postData = async (endpoint, req) => {
 	try {
 		const result = await axios.post(endpoint, req);
 
-		successToastRegister(result.data.msg);
+		successToast(result.data.msg);
 	} catch (err) {
-		errorToastRegister(err.response.data.msg);
+		errorToast(err.response.data.msg);
+	}
+};
+export const deleteData = async (endpoint) => {
+	try {
+		const result = await axios.delete(endpoint);
+		result.data.error
+			? errorToast(result.data.error)
+			: successToast(result.data.msg);
+	} catch (err) {
+		console.log(err);
 	}
 };

@@ -1,23 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, ListGroup } from 'react-bootstrap';
+import DeleteModal from './DeleteModal';
+import EditUserModal from './EditUserModal';
 
 export default function DashBoardItem(props) {
 	// console.log(props.users);
-	return (
-		<ListGroup.Item
-			key={props.users._id}
-			className="d-flex justify-content-evenly gap-3"
-		>
-			<h5 className="fas fa-user align-self-center"> </h5>
+	const users = { ...props.users };
 
-			<h5>Nombre:{props.users.name}</h5>
-			<h5>E-mail : {props.users.email}</h5>
-			<Button variant="success">
-				<i className="fas fa-edit"></i>
-			</Button>
-			<Button variant="danger">
-				<i className="fas fa-trash"></i>
-			</Button>
-		</ListGroup.Item>
+	const [showModal, setShow] = useState(false);
+	const [deleteModal, setDeleteModalShow] = useState(false);
+	const handleShow = () => setShow(true);
+	const handleDeleteModal = () => setDeleteModalShow(true);
+
+	return (
+		<>
+			<ListGroup.Item
+				key={props.users._id}
+				className="d-flex justify-content-evenly gap-3"
+			>
+				<h5 className="fas fa-user align-self-center"> </h5>
+
+				<h5>Nombre:{props.users.name}</h5>
+				<h5>E-mail : {props.users.email}</h5>
+				<Button
+					variant="success"
+					onClick={() => {
+						handleShow();
+					}}
+				>
+					<i className="fas fa-edit"></i>
+				</Button>
+				<Button
+					variant="danger"
+					onClick={() => {
+						handleDeleteModal();
+					}}
+				>
+					<i className="fas fa-trash"></i>
+				</Button>
+			</ListGroup.Item>
+			<EditUserModal
+				showModal={showModal}
+				users={users}
+				setShow={setShow}
+			></EditUserModal>
+
+			<DeleteModal
+				deleteModal={deleteModal}
+				title="usuario"
+				route="users"
+				id={users._id}
+				setDeleteModalShow={setDeleteModalShow}
+			></DeleteModal>
+		</>
 	);
 }
