@@ -18,10 +18,10 @@ export default function DashBoardItem(props) {
 				key={props.users._id}
 				className="d-flex justify-content-evenly gap-3"
 			>
-				<h5 className="fas fa-user align-self-center"> </h5>
+				<p className="fas fa-user align-self-center"> </p>
 
-				<h5>Nombre:{props.users.name}</h5>
-				<h5>E-mail : {props.users.email}</h5>
+				<p>Nombre:{props.users.name}</p>
+				<p>E-mail : {props.users.email}</p>
 				<Button
 					variant="success"
 					onClick={() => {
