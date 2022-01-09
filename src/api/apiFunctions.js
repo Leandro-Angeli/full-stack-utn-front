@@ -30,3 +30,12 @@ export const deleteData = async (endpoint) => {
 		console.log(err);
 	}
 };
+export const patchData = async (endpoint, req) => {
+	try {
+		const result = await axios.patch(endpoint, req);
+
+		successToast(result.data.msg);
+	} catch (err) {
+		errorToast(err.response.data.msg);
+	}
+};

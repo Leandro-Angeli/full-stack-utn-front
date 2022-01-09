@@ -1,21 +1,18 @@
 import React from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
+import { patchData } from '../api/apiFunctions';
+import UserForm from './UserForm';
 
 export default function EditUserModal(props) {
 	const users = { ...props.users };
 	const handleClose = () => props.setShow(false);
 	return (
-		<Modal show={props.showModal} onClick={() => handleClose()}>
-			<Modal.Header closeButton>
+		<Modal show={props.showModal}>
+			<Modal.Header closeButton onClick={() => handleClose()}>
 				<Modal.Title>Editar Usuario</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
-				<Form>
-					<Button variant="secondary" onClick={() => handleClose()}>
-						Cerrar
-					</Button>
-					<Button variant="primary">Editar</Button>
-				</Form>
+				<UserForm user={users} action={patchData}></UserForm>
 			</Modal.Body>
 			<Modal.Footer></Modal.Footer>
 		</Modal>

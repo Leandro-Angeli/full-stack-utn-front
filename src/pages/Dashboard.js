@@ -12,8 +12,8 @@ export default function Dashboard() {
 		fetchData(`${process.env.REACT_APP_BACK_END_URI}/products`, setProds);
 		fetchData(`${process.env.REACT_APP_BACK_END_URI}/users`, setUsers);
 	}, []);
-	console.log(prods);
-	console.log(users);
+	// console.log(prods);
+	// console.log(users);
 	return (
 		<div className="container my-5">
 			<h1 className="my-5 text-uppercase" style={{ color: 'var(--my-green)' }}>
