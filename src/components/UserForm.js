@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 
 import FormValidators from '../formValidations/FormValidators';
 export default function UserForm(props) {
-	console.log(props.user?._id);
+	// console.log(props.user?._id);
 	const {
 		register,
 		handleSubmit,
@@ -22,19 +22,18 @@ export default function UserForm(props) {
 	});
 
 	const onSubmit = async (data) => {
-		if (props.user._id) {
+		if (props.user?._id) {
 			console.log(
 				`${process.env.REACT_APP_BACK_END_URI}/users/${props.user._id}`
 			);
-			console.log(props.user._id);
+
 			await props.action(
 				`${process.env.REACT_APP_BACK_END_URI}/users/${props.user._id}`,
 				data
 			);
-		} else {
+		} else if (!props.user) {
 			await props.action(`${process.env.REACT_APP_BACK_END_URI}/users`, data);
 		}
-		setTimeout(4000, window.location.reload());
 	};
 	return (
 		<Form className="my-5" onSubmit={handleSubmit(onSubmit)}>
