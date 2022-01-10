@@ -21,6 +21,7 @@ export default function DashBoardItem(props) {
 				<p className="fas fa-user align-self-center"> </p>
 
 				<p>Nombre:{props.users.name}</p>
+				<p>Apellido:{props.users.last_name}</p>
 				<p>E-mail : {props.users.email}</p>
 				<Button
 					variant="success"

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Alert, Button, Form, Modal } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { fetchData } from '../api/apiFunctions';
+import { fetchData, patchData, postData } from '../api/apiFunctions';
 import ProductFormValidator from '../formValidations/ProductFormValidator';
-
+import axios from 'axios';
 export default function ProductForm(props) {
 	const {
 		register,
@@ -11,8 +11,15 @@ export default function ProductForm(props) {
 		formState: { errors },
 	} = useForm({
 		resolver: ProductFormValidator,
+		defaultValues: {
+			name: props.prods?.name,
+			description: props.prods?.description,
+			price: props.prods?.description,
+			category: props.prods?.description,
+		},
 	});
 	const [categories, setCategories] = useState();
+
 	// console.log('edit', props.edit);
 	// console.log('add', props.prods);
 	useEffect(() => {
@@ -21,9 +28,16 @@ export default function ProductForm(props) {
 			setCategories
 		);
 	}, []);
-	// console.log(categories);
-	const onSubmit = (data) => {
-		console.log(data);
+	console.log(props.edit);
+	const onSubmit = async (data) => {
+		if (props.edit === false) {
+			await postData(`${process.env.REACT_APP_BACK_END_URI}/products/`, data);
+		} else if (props.edit === true) {
+			await patchData(
+				`${process.env.REACT_APP_BACK_END_URI}/products/patch/${props.prods._id}`,
+				data
+			);
+		}
 	};
 	return (
 		<Modal show={props.showProductModal}>
@@ -45,7 +59,9 @@ export default function ProductForm(props) {
 							placeholder="nombre"
 						/>
 						<Form.Text className="text-muted">
-							<Alert variant="danger">alert</Alert>
+							{errors?.name && (
+								<Alert variant="danger">{errors.name.message}</Alert>
+							)}
 						</Form.Text>
 					</Form.Group>
 
@@ -57,22 +73,33 @@ export default function ProductForm(props) {
 							placeholder="Descripcion"
 							{...register('description')}
 						/>
+						<Form.Text className="text-muted">
+							{errors?.description && (
+								<Alert variant="danger">{errors.description.message}</Alert>
+							)}
+						</Form.Text>
 					</Form.Group>
 					<Form.Group className="mb-3" placeholder="precio">
 						<Form.Label>Precio</Form.Label>
 						<Form.Control
-							type="text"
+							type="number"
+							step="any"
 							placeholder="precio"
 							{...register('price')}
 						/>
+						<Form.Text>
+							{errors?.price && (
+								<Alert variant="danger">{errors.price.message}</Alert>
+							)}
+						</Form.Text>
 					</Form.Group>
 					<Form.Group>
 						<Form.Select
 							aria-label=" select "
-							// defaultValue={0}
+							defaultValue={props.prods?.category}
 							{...register('category')}
 						>
-							<option disabled value="0">
+							<option disabled value={'0'}>
 								CATEGORIA
 							</option>
 							{categories
@@ -83,10 +110,6 @@ export default function ProductForm(props) {
 								  ))
 								: null}
 						</Form.Select>
-					</Form.Group>
-					<Form.Group>
-						<Form.Label>Imagen</Form.Label>
-						<Form.Control {...register('img')} type="file" />
 					</Form.Group>
 
 					<Button

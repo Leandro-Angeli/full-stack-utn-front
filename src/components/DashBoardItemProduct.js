@@ -17,7 +17,9 @@ export default function DashBoardItemProduct(props) {
 			<ListGroup.Item className="d-flex justify-content-between gap-3">
 				{props.prods ? (
 					<>
-						<p>Productos : {props.prods.name} </p>
+						<p>Producto : {props.prods.name} </p>
+						<p>Descipcion : {props.prods.description} </p>
+						<p>Precio : {props.prods.price} </p>
 						<p className="ms-4">
 							Categoria : {props.prods.category.replace(/_/g, ' ')}
 						</p>
@@ -54,6 +56,7 @@ export default function DashBoardItemProduct(props) {
 				setDeleteModalShow={setDeleteModalShow}
 				handleShowProductModal={handleShowProductModal}
 				edit={true}
+				prods={products}
 			></ProductForm>
 		</>
 	);

@@ -32,10 +32,16 @@ export default function ProductCard(props) {
 			<Card.Img
 				variant="top"
 				className="img-fluid"
-				src={`/assets/products_img/image.png` || props.product.img || ' '}
+				src={
+					`/assets/products_img/supermarket-shopping.jpg` ||
+					props.product.img ||
+					' '
+				}
 			/>
 			<Card.Body>
-				<Card.Text>{props.product.description}</Card.Text>
+				<Card.Text>{props.product?.name}</Card.Text>
+				<Card.Text>{props.product?.description}</Card.Text>
+				<Card.Text>{props.product?.price} $</Card.Text>
 			</Card.Body>
 		</Card>
 	);

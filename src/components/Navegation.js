@@ -44,7 +44,7 @@ const Navegation = () => {
 						<Nav.Link as={Link} to="/register">
 							Registrarse
 						</Nav.Link>
-						<Nav.Link as={Link} to="/login">
+						<Nav.Link as={'button'} className="text-uppercase">
 							Login
 						</Nav.Link>
 

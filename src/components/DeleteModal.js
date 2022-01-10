@@ -1,16 +1,20 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { deleteData } from '../api/apiFunctions';
 
 export default function DeleteModal(props) {
 	const handleClose = () => props.setDeleteModalShow(false);
 
-	const handleDelete = () => {
-		deleteData(
+	// console.log(props.id);
+	// console.log(props.route);
+	const handleDelete = async () => {
+		await deleteData(
 			`${process.env.REACT_APP_BACK_END_URI}/${props.route}/${props.id}`
 		);
 		handleClose();
+		setTimeout(window.location.reload(), 4000);
 	};
 	// console.log(`delete modal ${props.users._id}`);
 	return (
@@ -19,6 +23,7 @@ export default function DeleteModal(props) {
 				<Modal.Title>Confirmar</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>Borrar {props.title} ?</Modal.Body>
+
 			<Modal.Footer>
 				<Button variant="secondary" onClick={() => handleClose()}>
 					Cerrar
