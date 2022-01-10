@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { Button, ListGroup } from 'react-bootstrap';
 import DeleteModal from './DeleteModal';
+import ProductForm from './ProductForm';
 
 export default function DashBoardItemProduct(props) {
 	// console.log(props);
 	const products = { ...props.prods };
 
-	const [showModal, setShow] = useState(false);
+	const [showProductModal, setProductModal] = useState(false);
 	const [deleteModal, setDeleteModalShow] = useState(false);
-	const handleShow = () => setShow(true);
+
+	const handleShowProductModal = () => setProductModal(!showProductModal);
 	const handleDeleteModal = () => setDeleteModalShow(true);
 	return (
 		<>
@@ -22,7 +24,12 @@ export default function DashBoardItemProduct(props) {
 					</>
 				) : null}
 
-				<Button variant="success ms-auto">
+				<Button
+					variant="success ms-auto"
+					onClick={() => {
+						handleShowProductModal();
+					}}
+				>
 					<i className="fas fa-edit"></i>
 				</Button>
 				<Button
@@ -41,6 +48,13 @@ export default function DashBoardItemProduct(props) {
 				id={products._id}
 				setDeleteModalShow={setDeleteModalShow}
 			></DeleteModal>
+			<ProductForm
+				showProductModal={showProductModal}
+				title="Editar Producto"
+				setDeleteModalShow={setDeleteModalShow}
+				handleShowProductModal={handleShowProductModal}
+				edit={true}
+			></ProductForm>
 		</>
 	);
 }

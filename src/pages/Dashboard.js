@@ -4,9 +4,12 @@ import { fetchData } from '../api/apiFunctions';
 import DashBoardItem from '../components/DashBoardItem';
 import DashBoardItemProduct from '../components/DashBoardItemProduct';
 import './dashboard.css';
+import ProductForm from '../components/ProductForm';
 export default function Dashboard() {
 	const [prods, setProds] = useState();
 	const [users, setUsers] = useState();
+	const [showPM, setPM] = useState(false);
+	const handlePM = () => setPM(!showPM);
 
 	useEffect(() => {
 		fetchData(`${process.env.REACT_APP_BACK_END_URI}/products`, setProds);
@@ -48,10 +51,16 @@ export default function Dashboard() {
 								<ListGroup>
 									<ListGroup.Item className="d-flex justify-content-between ">
 										<p>Agregar Producto</p>{' '}
-										<Button variant="primary">
+										<Button variant="primary" onClick={() => setPM(!showPM)}>
 											<i className="far fa-plus-square"></i>
 										</Button>{' '}
 									</ListGroup.Item>
+									<ProductForm
+										showProductModal={showPM}
+										handleShowProductModal={handlePM}
+										title="Agregar Producto"
+										edit={false}
+									></ProductForm>
 									{prods
 										? prods.map((p) => {
 												return (

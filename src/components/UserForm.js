@@ -16,8 +16,8 @@ export default function UserForm(props) {
 			last_name: props.user?.last_name || ' ',
 			phone: props.user?.phone || ' ',
 			email: props.user?.email || ' ',
-			password: ' ',
-			confirmPassword: ' ',
+			password: '',
+			confirmPassword: '',
 		},
 	});
 
