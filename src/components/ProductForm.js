@@ -28,7 +28,7 @@ export default function ProductForm(props) {
 			setCategories
 		);
 	}, []);
-	console.log(props.edit);
+
 	const onSubmit = async (data) => {
 		if (props.edit === false) {
 			await postData(`${process.env.REACT_APP_BACK_END_URI}/products/`, data);

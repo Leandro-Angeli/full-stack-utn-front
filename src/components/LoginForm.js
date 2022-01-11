@@ -2,10 +2,12 @@ import axios from 'axios';
 import React from 'react';
 import { Alert, Button, Form, Modal } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { postData } from '../api/apiFunctions';
+// import { postData } from '../api/apiFunctions';
 import { successToast, errorToast } from '../toasts/toast';
 
 import loginValidators from '../formValidations/loginValidators';
+import { setToken } from '../jwt/jwt';
+import { useNavigate } from 'react-router-dom';
 
 export default function LoginForm(props) {
 	const {
@@ -16,15 +18,19 @@ export default function LoginForm(props) {
 		resolver: loginValidators,
 		defaultValues: { name: ' ', password: ' ' },
 	});
+	const navigate = useNavigate();
 	const submitForm = (data) => {
 		axios
 			.post(`${process.env.REACT_APP_BACK_END_URI}/users/login`, data)
 			.then((res) => {
+				// console.log(res.data.token);
+				setToken(res.data.token);
 				if (res.data.msg) {
 					successToast(res.data.msg);
 				} else {
 					errorToast(res.data.error);
 				}
+				navigate('/dashboard');
 			})
 			.catch((err) => console.log(err));
 	};

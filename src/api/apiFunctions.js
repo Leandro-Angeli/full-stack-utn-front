@@ -19,6 +19,7 @@ export const postData = async (endpoint, req) => {
 	try {
 		const result = await axios.post(endpoint, req);
 		console.log(result.data);
+
 		successToast(result.data.msg);
 	} catch (err) {
 		console.log('err');
