@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form, Modal } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { patchData } from '../api/apiFunctions';
 import UserForm from './UserForm';
 

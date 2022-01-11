@@ -30,7 +30,7 @@ export const postData = async (endpoint, req) => {
 export const deleteData = async (endpoint) => {
 	try {
 		const result = await axios.delete(endpoint);
-		console.log(result);
+		// console.log(result);
 		if (result.data.error) {
 			errorToast(result.data.error);
 		} else {

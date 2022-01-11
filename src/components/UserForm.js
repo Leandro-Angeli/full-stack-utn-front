@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Alert, Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
+import { ReRenderContext } from '../context/RenderContext';
 
 import FormValidators from '../formValidations/FormValidators';
 export default function UserForm(props) {
 	// console.log(props.user?._id);
+	const { rend, setRend } = useContext(ReRenderContext);
+
 	const {
 		register,
 		handleSubmit,
@@ -23,17 +26,19 @@ export default function UserForm(props) {
 
 	const onSubmit = async (data) => {
 		if (props.user?._id) {
-			console.log(
-				`${process.env.REACT_APP_BACK_END_URI}/users/${props.user._id}`
-			);
+			// console.log(
+			// 	`${process.env.REACT_APP_BACK_END_URI}/users/${props.user._id}`
+			// );
 
 			await props.action(
 				`${process.env.REACT_APP_BACK_END_URI}/users/${props.user._id}`,
 				data
 			);
+			setRend(!rend);
 		} else if (!props.user) {
 			await props.action(`${process.env.REACT_APP_BACK_END_URI}/users`, data);
 		}
+		setRend(!rend);
 	};
 	return (
 		<Form className="my-5" onSubmit={handleSubmit(onSubmit)}>

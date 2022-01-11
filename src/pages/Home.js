@@ -15,7 +15,7 @@ export default function Home() {
 		// 	.then((res) => setCategories(res.data))
 		// 	.catch((err) => console.log(err));
 	}, []);
-	console.log(categories);
+	// console.log(categories);
 
 	return (
 		<section className="container my-5">

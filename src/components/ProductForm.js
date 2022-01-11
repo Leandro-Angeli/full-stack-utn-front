@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Alert, Button, Form, Modal } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { fetchData, patchData, postData } from '../api/apiFunctions';
 import ProductFormValidator from '../formValidations/ProductFormValidator';
 import axios from 'axios';
+import { ReRenderContext } from '../context/RenderContext';
+
 export default function ProductForm(props) {
 	const {
 		register,
@@ -14,12 +16,13 @@ export default function ProductForm(props) {
 		defaultValues: {
 			name: props.prods?.name,
 			description: props.prods?.description,
-			price: props.prods?.description,
-			category: props.prods?.description,
+			price: props.prods?.price,
+			category: props.prods?.category,
 		},
 	});
 	const [categories, setCategories] = useState();
-
+	const { rend, setRend } = useContext(ReRenderContext);
+	// console.log(rend);
 	// console.log('edit', props.edit);
 	// console.log('add', props.prods);
 	useEffect(() => {
@@ -32,11 +35,13 @@ export default function ProductForm(props) {
 	const onSubmit = async (data) => {
 		if (props.edit === false) {
 			await postData(`${process.env.REACT_APP_BACK_END_URI}/products/`, data);
+			setRend(!rend);
 		} else if (props.edit === true) {
 			await patchData(
 				`${process.env.REACT_APP_BACK_END_URI}/products/patch/${props.prods._id}`,
 				data
 			);
+			setRend(!rend);
 		}
 	};
 	return (

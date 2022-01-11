@@ -5,11 +5,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import TokenContext from './context/Context';
+import ReRenderContext from './context/RenderContext';
 ReactDOM.render(
 	<BrowserRouter>
 		<React.StrictMode>
 			<TokenContext>
-				<App />
+				<ReRenderContext>
+					<App />
+				</ReRenderContext>
 			</TokenContext>
 		</React.StrictMode>
 	</BrowserRouter>,

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { ReRenderContext } from '../context/RenderContext';
 
 import { deleteData } from '../api/apiFunctions';
 
@@ -9,12 +10,13 @@ export default function DeleteModal(props) {
 
 	// console.log(props.id);
 	// console.log(props.route);
+	const { rend, setRend } = useContext(ReRenderContext);
 	const handleDelete = async () => {
 		await deleteData(
 			`${process.env.REACT_APP_BACK_END_URI}/${props.route}/${props.id}`
 		);
 		handleClose();
-		setTimeout(window.location.reload(), 4000);
+		setRend(!rend);
 	};
 	// console.log(`delete modal ${props.users._id}`);
 	return (

@@ -1,20 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Row, Tab, Col, Nav, ListGroup, Button } from 'react-bootstrap';
 import { fetchData } from '../api/apiFunctions';
 import DashBoardItem from '../components/DashBoardItem';
 import DashBoardItemProduct from '../components/DashBoardItemProduct';
 import './dashboard.css';
 import ProductForm from '../components/ProductForm';
+import { ReRenderContext } from '../context/RenderContext';
+
 export default function Dashboard() {
 	const [prods, setProds] = useState();
 	const [users, setUsers] = useState();
 	const [showPM, setPM] = useState(false);
+	const { rend, setRend } = useContext(ReRenderContext);
 	const handlePM = () => setPM(!showPM);
 
 	useEffect(() => {
 		fetchData(`${process.env.REACT_APP_BACK_END_URI}/products`, setProds);
 		fetchData(`${process.env.REACT_APP_BACK_END_URI}/users`, setUsers);
-	}, []);
+	}, [rend]);
+
 	// console.log(prods);
 	// console.log(users);
 	return (
@@ -57,6 +61,7 @@ export default function Dashboard() {
 									</ListGroup.Item>
 									<ProductForm
 										showProductModal={showPM}
+										setProds={setProds}
 										handleShowProductModal={handlePM}
 										title="Agregar Producto"
 										edit={false}

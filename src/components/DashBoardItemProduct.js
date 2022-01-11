@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, ListGroup } from 'react-bootstrap';
+
 import DeleteModal from './DeleteModal';
 import ProductForm from './ProductForm';
 
@@ -12,6 +13,7 @@ export default function DashBoardItemProduct(props) {
 
 	const handleShowProductModal = () => setProductModal(!showProductModal);
 	const handleDeleteModal = () => setDeleteModalShow(true);
+
 	return (
 		<>
 			<ListGroup.Item className="d-flex justify-content-between gap-3">

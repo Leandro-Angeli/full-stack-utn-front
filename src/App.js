@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { createContext, useContext } from 'react';
+import { useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Home from './pages/Home';
@@ -13,12 +13,11 @@ import NotFound from './pages/NotFound';
 import ProductPage from './pages/ProductPage';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
-import { useEffect, useState } from 'react';
 
-import Context, { TokenContext } from './context/Context';
+import { TokenContext } from './context/Context';
 function App() {
 	const { token } = useContext(TokenContext);
-
+	// console.log(token);
 	return (
 		<>
 			{' '}
@@ -27,7 +26,11 @@ function App() {
 				<Route path="/" element={<Home />} />
 				<Route path="/categories/:category" element={<Categories />} />
 
-				{token && <Route path="/dashboard" element={<Dashboard />} />}
+				{token ? (
+					<Route path="/dashboard" element={<Dashboard />} />
+				) : (
+					<Route path="/dashboard" element={<Home />} />
+				)}
 
 				<Route path="/register" element={<Register />} />
 				<Route path="/product/:_id" element={<ProductPage />} />
